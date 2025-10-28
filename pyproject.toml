@@ -1,0 +1,94 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+
+[project]
+name = "Redis Cache"
+dynamic = ["version"]
+description = "Class and decorator to use with Redis"
+authors = [
+  { name = "Brian Metzler", email = "baldie@gmail.com" }
+]
+readme = "README.md"
+license = { file = "LICENSE.md" }
+requires-python = ">=3.12"
+dependencies = [
+]
+homepage = "https://github.com/bkmetzler/redis_cache"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "redis_cache/version.py"
+
+
+[tool.hatch.envs.dev]
+dependencies = [
+  "pytest",
+  "black",
+  "mypy",
+  "ruff",
+  "coverage",
+  "pre-commit"
+]
+
+[tool.hatch.envs.test]
+dependencies = [
+  "pytest"
+]
+[tool.hatch.envs.test.scripts]
+test = "pytest"
+
+[tool.hatch.envs.lint]
+dependencies = [
+  "black",
+  "mypy",
+  "ruff"
+]
+[tool.hatch.envs.lint.scripts]
+check = [
+  "black --check .",
+  "ruff check .",
+  "mypy {{ app_directory }}"
+]
+fix = [
+  "black .",
+  "ruff check . --fix"
+]
+
+
+[tool.black]
+line-length = 120
+target-version = ['py312']
+
+[tool.mypy]
+python_version = "3.12"
+exclude = [
+  "tests",
+]
+strict_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+check_untyped_defs = true
+ignore_missing_imports = true
+disallow_untyped_defs = true
+
+
+[[tool.mypy.overrides]]
+module = [
+  "pydantic",
+  "tests",
+]
+ignore_missing_imports = true
+
+[tool.pytest_env]
+UNIT_TEST = true
+
+
+[tool.flake8]
+max-line-length = 120
+per-file-ignores = """
+    tests/*/fixtures/*.py: E501
+"""

@@ -1,0 +1,73 @@
+default_language_version:
+    python: python3.12
+
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v6.0.0
+  hooks:
+  - id: check-toml
+  - id: check-yaml
+  - id: check-json
+  - id: trailing-whitespace
+  - id: end-of-file-fixer
+
+- repo: https://github.com/psf/black-pre-commit-mirror
+  rev: 25.9.0
+  hooks:
+  - id: black
+
+- repo: https://github.com/PyCQA/flake8
+  rev: 7.3.0
+  hooks:
+  - id: flake8
+    additional_dependencies:
+      - pep8-naming
+      - flake8-implicit-str-concat
+      - flake8-pyproject
+
+- repo: https://github.com/asottile/reorder_python_imports
+  rev: v3.16.0
+  hooks:
+  - id: reorder-python-imports
+    args:
+      - --py312-plus
+
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: v1.18.2
+  hooks:
+    - id: mypy
+      args:
+        - --non-interactive
+        - --install-types
+        - --no-strict-optional
+      additional_dependencies:
+        - types-mock
+        - types-freezegun
+
+- repo: https://github.com/asottile/pyupgrade
+  rev: v3.21.0
+  hooks:
+  - id: pyupgrade
+    args: [--py312-plus]
+
+- repo: https://github.com/jazzband/pip-tools
+  rev: v7.5.1
+  hooks:
+  - id: pip-compile
+    name: pip-compile requirements.in
+    files: ^(requirements\.in|requirements\.txt)$
+    args:
+    - "--output-file"
+    - "requirements.txt"
+    - "requirements.in"
+    additional_dependencies:
+      - pyyaml>6.0
+  - id: pip-compile
+    name: pip-compile test-requirements.in
+    files: ^(test-requirements\.txt|test-requirements\.in)$
+    args:
+    - "--output-file"
+    - "test-requirements.txt"
+    - "test-requirements.in"
+    additional_dependencies:
+      - pyyaml>6.0
