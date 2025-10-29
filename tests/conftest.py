@@ -2,7 +2,7 @@ import fakeredis
 import pytest
 from redis import Redis
 
-from redis_decorator import RedisCache
+from redis_decorator_generator import RedisCache
 
 
 @pytest.fixture

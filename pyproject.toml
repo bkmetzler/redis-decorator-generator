@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 
 [project]
-name = "redis-decorator"
+name = "redis-decorator-generator"
 dynamic = ["version"]
 description = "Class and decorator to use with Redis"
 authors = [
@@ -21,21 +21,29 @@ homepage = "https://github.com/bkmetzler/redis-decorator-generator"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-    "Programming Language :: Python :: 3.14",
     "Operating System :: OS Independent",
 ]
 
 [tool.hatch.version]
 source = "vcs"
+# path = "redis_decorator_generator/version.py"
+# pattern = "__version__ = 'b(?P<version>^'])'"
 
 [tool.hatch.build.hooks.vcs]
-version-file = "redis_decorator/version.py"
+version-file = "redis_decorator_generator/version.py"
+
+[tool.hatch.version.raw-options]
+version_scheme = "no-guess-dev"
 
 [tool.black]
 line-length = 120
 target-version = ['py312']
-extend-exclude = "redis_decorator/version.py"
+extend-exclude = "redis_decorator_generator/version.py"
+
+[tool.ruff]
+exclude = [
+    "redis_decorator_generator/version.py",
+]
 
 [tool.mypy]
 python_version = "3.12"
@@ -48,7 +56,6 @@ warn_unused_ignores = true
 check_untyped_defs = true
 ignore_missing_imports = true
 disallow_untyped_defs = true
-
 
 [[tool.mypy.overrides]]
 module = [
@@ -64,9 +71,8 @@ UNIT_TEST = true
 max-line-length = 120
 per-file-ignores = """
     tests/*/fixtures/*.py: E501
-    redis_decorator/version.py: F401
+    redis_decorator_generator/version.py: F401
 """
-
 
 [tool.hatch.envs.dev]
 dependencies = [
