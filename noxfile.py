@@ -30,7 +30,7 @@ def tests(session: Session) -> None:
     """
     session.install("--upgrade", "pip")
     session.run("pip", "--version")
-    session.install(".[dev]")
+    session.install(".[dev]", "black", "mypy", "ruff")
     session.run("pytest", external=True)
 
 
@@ -50,5 +50,5 @@ def lint(session: Session) -> None:
     session.run("pip", "--version")
     session.install(".[dev]", "black", "mypy", "ruff")
     session.run("black", "--check", "--diff", ".", external=True)
-    session.run("mypy", "-p", "redis_decorator", external=True)
+    session.run("mypy", "-p", "redis_decorator_generator", external=True)
     session.run("ruff", "check", ".", external=True)

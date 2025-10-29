@@ -1,7 +1,7 @@
 from typing import Any
 
-from redis_decorator import generate
-from redis_decorator import RedisCache
+from redis_decorator_generator import generate
+from redis_decorator_generator import RedisCache
 
 
 def test_redis_client(redis: RedisCache) -> None:
