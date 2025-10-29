@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling", "hatch-vcs"]
+requires = ["hatchling >= 1.26", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 
@@ -16,7 +16,15 @@ requires-python = ">=3.12"
 dependencies = [
   "redis",
 ]
-homepage = "https://github.com/bkmetzler/redis-decorator"
+homepage = "https://github.com/bkmetzler/redis-decorator-generator"
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Operating System :: OS Independent",
+]
 
 [tool.hatch.version]
 source = "vcs"
