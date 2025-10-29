@@ -27,7 +27,7 @@ classifiers = [
 ]
 
 [tool.hatch.version]
-source = "vcs"
+path = "redis_decorator/version.py"
 
 [tool.hatch.build.hooks.vcs]
 version-file = "redis_decorator/version.py"
@@ -36,6 +36,11 @@ version-file = "redis_decorator/version.py"
 line-length = 120
 target-version = ['py312']
 extend-exclude = "redis_decorator/version.py"
+
+[tool.ruff]
+exclude = [
+    "redis_decorator/version.py",
+]
 
 [tool.mypy]
 python_version = "3.12"
@@ -48,7 +53,6 @@ warn_unused_ignores = true
 check_untyped_defs = true
 ignore_missing_imports = true
 disallow_untyped_defs = true
-
 
 [[tool.mypy.overrides]]
 module = [
@@ -66,7 +70,6 @@ per-file-ignores = """
     tests/*/fixtures/*.py: E501
     redis_decorator/version.py: F401
 """
-
 
 [tool.hatch.envs.dev]
 dependencies = [

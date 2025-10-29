@@ -17,7 +17,7 @@ PYTHON_VERSIONS = {
 }
 
 
-@nox.session(python=PYTHON_VERSIONS["standard"])
+@nox.session(python=PYTHON_VERSIONS["latest"])
 def tests(session: Session) -> None:
     """
     Initialize environment and run pytest
@@ -34,7 +34,7 @@ def tests(session: Session) -> None:
     session.run("pytest", external=True)
 
 
-@nox.session(python=PYTHON_VERSIONS["standard"])
+@nox.session(python=PYTHON_VERSIONS["latest"])
 def lint(session: Session) -> None:
     """
     Initialize environment by installing black, mypy, and ruff.
