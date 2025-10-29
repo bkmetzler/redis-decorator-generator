@@ -1,8 +1,8 @@
 # Redis Decorator Generator
 
-![deploy](https://github.com/github/bkmetzler/redis-decorator-generator/actions/workflows/deploy.yaml/badge.svg)
+[![Deploy Workflow](https://github.com/bkmetzler/redis-decorator-generator/actions/workflows/deploy.yaml/badge.svg?branch=main)](https://github.com/bkmetzler/redis-decorator-generator/actions/workflows/deploy.yaml)
 
-![pull requests](https://github.com/github/bkmetzler/redis-decorator-generator/actions/workflows/pull_request.yaml/badge.svg)
+[![CI Workflow](https://github.com/bkmetzler/redis-decorator-generator/actions/workflows/pull_request.yaml/badge.svg?branch=main)](https://github.com/bkmetzler/redis-decorator-generator/actions/workflows/pull_request.yaml)
 
 ## Description
 This package is a simple wrapper around the standard redis.Redis package `pip install redis`.
