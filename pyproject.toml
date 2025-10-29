@@ -16,13 +16,18 @@ requires-python = ">=3.12"
 dependencies = [
   "redis",
 ]
-homepage = "https://github.com/bkmetzler/redis-decorator-generator"
+
 
 classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.12",
     "Operating System :: OS Independent",
 ]
+
+[project.urls]
+Homepage = "https://github.com/bkmetzler/redis-decorator-generator"
+Issues = "https://github.com/bkmetzler/redis-decorator-generator/issues"
+
 
 [tool.hatch.version]
 source = "vcs"
