@@ -7,11 +7,12 @@ PYTHON_311 = "3.11"
 PYTHON_312 = "3.12"
 PYTHON_313 = "3.13"
 PYTHON_314 = "3.14"
+PYTHON_315 = "3.15"
 
 
 PYTHON_VERSIONS = {
-    "all": [PYTHON_311, PYTHON_312, PYTHON_313, PYTHON_314],
-    "standard": [PYTHON_311, PYTHON_312, PYTHON_313],
+    "all": [PYTHON_311, PYTHON_312, PYTHON_313, PYTHON_314, PYTHON_315],
+    "standard": [PYTHON_312, PYTHON_313, PYTHON_314],
     "latest": [PYTHON_312],
 }
 
@@ -27,8 +28,10 @@ def tests(session: Session) -> None:
     Returns:
         None
     """
+    session.install("--upgrade", "pip")
+    session.run("pip", "--version")
     session.install(".[dev]")
-    session.run("pytest")
+    session.run("pytest", external=True)
 
 
 @nox.session(python=PYTHON_VERSIONS["standard"])
@@ -43,69 +46,9 @@ def lint(session: Session) -> None:
     Returns:
         None
     """
-
-    session.install("black", "mypy", "ruff")
-    session.run("black", "--check", "--diff", ".")
-    session.run("mypy", "-p", "transaction")
-    session.run("ruff", "check", ".")
-
-
-@nox.session(python=PYTHON_VERSIONS["standard"])
-def mypy(session: Session) -> None:
-    """
-    Initialize environment and run mypy
-
-    Args:
-        session: nox.session.Session
-
-    Returns:
-        None
-    """
-    session.install("mypy")
-    session.run("mypy", "-p", "transaction")
-
-
-@nox.session(python=PYTHON_VERSIONS["latest"])
-def black(session: Session) -> None:
-    """
-    Initialize environment and run black to reformat code
-
-    Args:
-        session: nox.session.Session
-
-    Returns:
-        None
-    """
-
-    session.install("black")
-    session.run("black", ".")
-
-
-@nox.session(python=PYTHON_VERSIONS["latest"])
-def ruff(session: Session) -> None:
-    """
-    Initialize environment, install and run ruff to reformat code
-
-    Args:
-        session: nox.session.Session
-
-    Returns:
-        None
-    """
-    session.install("ruff")
-    session.run("ruff", "format", ".")
-
-
-@nox.session(default=False)
-def format(session: Session) -> None:
-    """
-    Initialize environment and run ruff and black sessions
-
-    Args:
-        session: nox.session.Session
-
-    Returns:
-        None
-    """
-    ruff(session)
-    black(session)
+    session.install("--upgrade", "pip")
+    session.run("pip", "--version")
+    session.install(".[dev]", "black", "mypy", "ruff")
+    session.run("black", "--check", "--diff", ".", external=True)
+    session.run("mypy", "-p", "redis_decorator", external=True)
+    session.run("ruff", "check", ".", external=True)
